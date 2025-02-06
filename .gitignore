@@ -1,1 +1,61 @@
+# Python specific
+*.pyc
+*.pyo
+__pycache__
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.bak
+*.swp
 
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Kaggle dataset download folder
+kaggle_datasets/
+
+# Google Cloud credentials and config
+*.json
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# MacOS Finder attributes
+.DS_Store
+
+# Windows thumbs.db
+Thumbs.db
+
+# Test coverage reports
+coverage/
+*.coveragerc
+*.tox
+*.nox
+*.coverage
+
+# Distribution / Packaging
+*.egg
+*.egg-info
+dist/
+build/
+*.whl
+*.tar.gz
+
+# pytest
+.cache
+nosetests.xml
+coverage.xml
+*.coveragerc
+
+# Documentation build
+docs/_build/
