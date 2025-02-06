@@ -3,6 +3,24 @@ from multiprocessing import cpu_count, Pool
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
+def DataOptimizer(func):
+    """Decorator to apply data optimization before and after function execution."""
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        try:
+            logging.info(f"Optimizing before executing {func.__name__}...")
+            self.optimize()  # Apply all optimizations before function runs
+
+            result = func(self, *args, **kwargs)  # Execute function
+
+            logging.info(f"Optimizing after executing {func.__name__}...")
+            self.optimize()  # Apply optimizations after function runs
+            return result
+        except Exception as e:
+            logging.error(f"Error in {func.__name__}: {e}")
+            return None
+    return wrapper
+
 class DataOptimization:
     def __init__(self, df: pd.DataFrame):
         self._df = df
