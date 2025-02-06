@@ -22,6 +22,14 @@ jobs:
       with:
         python-version: '3.8'  # Set the Python version for the environment
 
+    - name: Cache Python dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-python-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-python-
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -30,12 +38,17 @@ jobs:
     - name: Run tests
       run: |
         # If using pytest, run the tests
-        pytest  # Adjust based on your test framework, like unittest or others
+        pytest --maxfail=1 --disable-warnings -q  # Stop after the first failure, disable warnings, run quietly
 
     - name: Lint code
       run: |
         # If using flake8 for linting, run the linter
         flake8 .  # Lint all files in the repository
+
+    - name: Format code
+      run: |
+        # If using black for formatting, auto-format the code
+        black .  # Format all Python files in the repository
 
     - name: Upload coverage report
       if: success()  # Upload coverage if tests pass
@@ -43,3 +56,11 @@ jobs:
         # If using coverage.py, upload the report to a service like Codecov
         coverage report
         coverage html  # Generate HTML coverage report
+        # Upload to a coverage service like Codecov
+        bash <(curl -s https://codecov.io/bash)  # Example for Codecov (requires Codecov token in the repo settings)
+
+    - name: Check for vulnerable dependencies
+      run: |
+        # Using safety or a similar tool to check for vulnerabilities in dependencies
+        pip install safety
+        safety check --full-report
