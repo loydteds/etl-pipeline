@@ -1,1 +1,19 @@
+# Core dependencies
+pandas==1.5.0
+numpy==1.23.0
+google-cloud-bigquery==3.0.1
+
+# Testing dependencies
+pytest==7.2.0
+pytest-cov==3.0.0  # For code coverage integration with pytest
+
+# Linting and code quality
+flake8==5.0.0
+black==22.10.0  # For automatic code formatting
+
+# Security vulnerability checks
+safety==1.10.3
+
+# For CI 
+coverage==6.3.2
 
