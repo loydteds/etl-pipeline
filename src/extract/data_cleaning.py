@@ -5,7 +5,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 class DataCleaning:
     def __init__(self, dataframe: pd.DataFrame):
-        self._df = dataframe  # Encapsulation (data hiding)
+        self._df = dataframe 
     
     def check_missing_values(self):
         """Logs and returns missing values count per column."""
